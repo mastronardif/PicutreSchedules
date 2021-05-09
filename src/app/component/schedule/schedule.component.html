@@ -1,0 +1,64 @@
+<div class="course">
+
+  <!-- <ng-container *ngIf="(course$ | async) as course">
+
+      <h2>{{course?.description}}</h2>
+
+  </ng-container> -->
+
+ <!-- <div  *ngIf="(schedule$ | async) as lessons">
+(schedule$ | async)| json
+<pre> {{lessons | json }} </pre>
+</div> -->
+<span *ngIf="editMode=='EDIT'"> EDIT </span>
+  <table class="lessons-table mat-elevation-z7" *ngIf="(schedule$ | async) as item">
+      <thead>
+          <th>#</th>
+          <th>
+            <span>
+              {{item.data?.description}}
+            </span>
+          </th>
+          <th>#</th>
+      </thead>
+
+      <ng-container *ngFor="let itt of item.data.row; index as index; first as isFirst; let isLast = last">
+
+        <tr style="height:15px; background-color: lightcoral;">
+
+          <td *ngIf="editMode=='EDIT'" colspan="100%">
+          <button> Add </button>
+              <button *ngIf="!isFirst">Remove</button>
+         </td>
+        </tr>
+
+        <tr>
+          <td class="seqno-cell">{{index+1}}</td>
+          <td class="description-cell">
+            <img class="course-thumbnail ng-star-inserted" [src] ="itt.picture">
+            <br/>
+            {{itt.name}}
+          </td>
+          <td>
+            <div *ngIf="editMode=='EDIT'" class="btn-group">
+              <button>Del</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr *ngIf="editMode=='EDIT'" style="height:15px; background-color: lightcoral;">
+
+          <td *ngIf="editMode=='EDIT' && isLast" colspan="100%">
+          <button> Add </button>
+              <button *ngIf="!isFirst">Remove</button>
+         </td>
+        </tr>
+      </ng-container>
+  </table>
+</div>
+
+
+
+
+
+

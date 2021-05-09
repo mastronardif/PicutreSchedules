@@ -1,0 +1,35 @@
+<mat-card *ngFor="let course of courses" class="course-card mat-elevation-z10">
+
+    <mat-card-header>
+        <mat-card-title>{{course.data.description}}</mat-card-title>
+
+    </mat-card-header>
+
+    <img mat-card-image [src]="course.data.row[0].picture">
+
+    <mat-card-content>
+        <p>{{course.data.description}} </p>
+    </mat-card-content>
+
+    <mat-card-actions class="course-actions">
+
+        <!-- <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/schedules', course.id]">
+          VIEW
+        </button>
+        <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/schedules_edit_child', course.id]">
+          EDIT
+      </button> -->
+
+      <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/schedules/view', course.id]">
+        VIEW
+      </button>
+      <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/schedules/edit', course.id]">
+        EDIT
+    </button>
+
+      <!-- <a style="cursor: pointer;" (click)="onEditSchedule(course.id)">[OnEdit]</a>
+      <a style="cursor: pointer;" (click)="onViewSchedule(course.id)">[OnView]</a> -->
+
+    </mat-card-actions>
+
+</mat-card>

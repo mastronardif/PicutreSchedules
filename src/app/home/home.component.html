@@ -1,0 +1,44 @@
+<div class="courses-panel">
+
+  <h3>All Schedules</h3>
+
+  <mat-tab-group>
+      <mat-tab label="Search">
+          <schedules-card-list [courses]="schedules$ | async">
+          </schedules-card-list>
+      </mat-tab>
+
+      <mat-tab label="Tags">
+        <ul *ngFor="let lesson of schedules$ | async">
+          <li class="seqno-cell">{{lesson | json}}</li>
+        </ul>
+        <!-- <ul *ngFor="let lesson of advancedCourses$ | async">
+          <li class="seqno-cell">{{lesson.description}}</li>
+        </ul> -->
+
+          <!-- <courses-card-list
+                  [courses]="advancedCourses$ | async"
+
+          ></courses-card-list> -->
+
+      </mat-tab>
+  </mat-tab-group>
+</div>
+
+<!-- <hr/>
+<div class="courses-panel">
+  <h3>All Courses</h3>
+  <mat-tab-group>
+      <mat-tab label="Beginners">
+          <courses-card-list
+                  [courses]="beginnerCourses$ | async">
+          </courses-card-list>
+      </mat-tab>
+
+      <mat-tab label="Advanced">
+          <courses-card-list
+                  [courses]="advancedCourses$ | async"
+          ></courses-card-list>
+      </mat-tab>
+  </mat-tab-group>
+</div> -->
