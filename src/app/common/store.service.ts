@@ -104,6 +104,10 @@ export class Store {
     );
   }
 
+  saveSchedule(schedule: ScheduleRootObject) {
+    console.log('saving '+schedule);
+  }
+
   saveCourse(courseId: number, changes): Observable<any> {
     const courses = this.subject.getValue();
 

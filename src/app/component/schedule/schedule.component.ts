@@ -1,10 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ActivatedRoute, Params } from "@angular/router";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { ScheduleRootObject } from "../../common/services/schedule.model";
 import { Store } from "../../common/store.service";
 import { createHttpObservable } from "../../common/util";
+import { CourseDialogComponent } from "../../course-dialog/course-dialog.component";
 import { Course } from "../../model/course";
 import { Lesson } from "../../model/lesson";
 
@@ -25,7 +27,7 @@ export class ScheduleComponent implements OnInit {
 
   lessons$: Observable<Lesson[]>;
 
-  constructor(private route: ActivatedRoute, private store: Store) {}
+  constructor(private dialog: MatDialog, private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
     let iii = this.route.snapshot.paramMap.get('id');
@@ -49,6 +51,20 @@ export class ScheduleComponent implements OnInit {
     // const initialLessons$ = this.loadLessons();
 
     // this.lessons$ = concat(initialLessons$);
+  }
+
+  add(schedule: ScheduleRootObject) {
+    console.log(`add(${schedule})`);
+    console.log(schedule);
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = schedule;
+    //debugger;
+
+    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
   }
 
   // loadLessons(search = ""): Observable<Lesson[]> {

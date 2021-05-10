@@ -27,8 +27,10 @@
         <tr style="height:15px; background-color: lightcoral;">
 
           <td *ngIf="editMode=='EDIT'" colspan="100%">
-          <button> Add </button>
-              <button *ngIf="!isFirst">Remove</button>
+            <button mat-button class="mat-raised-button mat-accent" (click)="add(item)">
+            Add
+            </button>
+            <button *ngIf="!isFirst">Remove</button>
          </td>
         </tr>
 

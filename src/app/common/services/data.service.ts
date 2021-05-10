@@ -5,7 +5,7 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { of, throwError } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Post } from './post.model';
 import { ScheduleRootObject } from './schedule.model';
@@ -21,6 +21,7 @@ export class DataService {
   //private REST_API_SERVER = "http://localhost:3000";
   private REST_API_SERVER = "https://localhost:44315/api/products?str=ZZXZXZXZXZXZXZXZXZXZ";
   private REST_API_SERVER22 = 'https://ng-complete-guide-8f48f-default-rtdb.firebaseio.com/schedules';
+  error = new Subject<string>();
   constructor(private httpClient: HttpClient) { }
 
   public sendGetRequest(){
@@ -69,6 +70,27 @@ export class DataService {
           // Send to analytics server
           return throwError(errorRes);
         })
+      );
+  }
+
+  createAndStorePostSchedule(title: string, content: string) {
+    const postData: Post = { title: title, content: content };
+    this.httpClient
+      .post<{ name: string }>(
+        //'https://ng-complete-guide-c56d3.firebaseio.com/posts.json',
+		    `${urlFirebase}/posts.json`,
+        postData,
+        {
+          observe: 'response'
+        }
+      )
+      .subscribe(
+        responseData => {
+          console.log(responseData);
+        },
+        error => {
+          this.error.next(error.message);
+        }
       );
   }
 
