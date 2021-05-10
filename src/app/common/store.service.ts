@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
-import { BehaviorSubject, observable, Observable, Subject, timer } from "rxjs";
+import { BehaviorSubject, observable, Observable, scheduled, Subject, timer } from "rxjs";
 import { Course } from "../model/course";
 import { ScheduleRootObject } from './services/schedule.model';
 import {
@@ -16,6 +16,7 @@ import {
 import { createHttpObservable } from "./util";
 import { fromPromise } from "rxjs/internal-compatibility";
 import { DataService } from "./services/data.service";
+import * as moment from "moment";
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class Store {
   private subject = new BehaviorSubject<Course[]>([]);
   private scheduleSubject = new BehaviorSubject<ScheduleRootObject[]>([]);
   //constructor(private http33: HttpClient) {}
-  constructor(private dataService: DataService) {
+  constructor(private http: HttpClient, private dataService: DataService) {
   }
 
   courses$: Observable<Course[]> = this.subject.asObservable();
@@ -105,8 +106,22 @@ export class Store {
   }
 
   saveSchedule(schedule: ScheduleRootObject) {
+
     console.log('saving '+schedule);
+
+
+const format1 = "YYYY-MM-DD HH:mm:ss"
+var date1 = new Date();
+
+const dateTime1 = moment(date1).format(format1);
+
+    schedule.data.description= dateTime1+ schedule.data.description;
+    console.log(schedule);
+
+    this.dataService.createAndStoreSchedule(schedule, 'content');
+    //this.dataService.createAndStorePostSchedule(schedule.data.description, 'content');
   }
+
 
   saveCourse(courseId: number, changes): Observable<any> {
     const courses = this.subject.getValue();

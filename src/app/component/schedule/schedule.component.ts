@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ActivatedRoute, Params } from "@angular/router";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { CardPosition } from "../../common/services/cardposition.model";
 import { ScheduleRootObject } from "../../common/services/schedule.model";
 import { Store } from "../../common/store.service";
 import { createHttpObservable } from "../../common/util";
@@ -53,15 +54,24 @@ export class ScheduleComponent implements OnInit {
     // this.lessons$ = concat(initialLessons$);
   }
 
-  add(schedule: ScheduleRootObject) {
+  add(schedule: ScheduleRootObject, isFirst: boolean, isLast: boolean, index: number) {
     console.log(`add(${schedule})`);
     console.log(schedule);
+    console.log(`isFirst: ${isFirst}, isLast: ${isLast}, index: ${index}`);
+    const pos: number = index;
+
+    let cp:CardPosition = { schedule: schedule, position: pos};
+
+//     console.log(arr.join()); // Jani,Hege,Stale,Kai Jim,Borge
+// arr.splice(2, 0, "Lene");
+// console.log(arr.join()); // Jani,Hege,Lene,Stale,Kai Jim,Borge
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    dialogConfig.data = schedule;
+    dialogConfig.data = cp;
+    //dialogConfig.data = schedule;
     //debugger;
 
     const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);

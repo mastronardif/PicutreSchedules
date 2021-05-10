@@ -5,7 +5,7 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { Subject, throwError } from 'rxjs';
+import { scheduled, Subject, throwError } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Post } from './post.model';
 import { ScheduleRootObject } from './schedule.model';
@@ -73,6 +73,31 @@ export class DataService {
       );
   }
 
+  createAndStoreSchedule(schedule: ScheduleRootObject, content: string) {
+    console.log(schedule);
+    const scheduleData: ScheduleRootObject = schedule;
+    console.log(`scheduleData.id= ${scheduleData.id}`);
+
+    //const postData: Post = { title: title, content: content };
+    const postData: ScheduleRootObject = scheduleData;
+    this.httpClient
+      .post<{ name: string }>(
+        //'https://ng-complete-guide-c56d3.firebaseio.com/posts.json',
+		    `${urlFirebase}/schedules.json`,
+        postData,
+        {
+          observe: 'response'
+        }
+      )
+      .subscribe(
+        responseData => {
+          console.log(responseData);
+        },
+        error => {
+          this.error.next(error.message);
+        }
+      );
+  }
   createAndStorePostSchedule(title: string, content: string) {
     const postData: Post = { title: title, content: content };
     this.httpClient

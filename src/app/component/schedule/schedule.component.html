@@ -27,9 +27,7 @@
         <tr style="height:15px; background-color: lightcoral;">
 
           <td *ngIf="editMode=='EDIT'" colspan="100%">
-            <button mat-button class="mat-raised-button mat-accent" (click)="add(item)">
-            Add
-            </button>
+            <button mat-button class="mat-raised-button mat-accent" (click)="add(item, isFirst, isLast, index)"> Add </button>
             <button *ngIf="!isFirst">Remove</button>
          </td>
         </tr>
@@ -51,7 +49,7 @@
         <tr *ngIf="editMode=='EDIT'" style="height:15px; background-color: lightcoral;">
 
           <td *ngIf="editMode=='EDIT' && isLast" colspan="100%">
-          <button> Add </button>
+            <button mat-button class="mat-raised-button mat-accent" (click)="add(item, isFirst, isLast, index+1)"> Add </button>
               <button *ngIf="!isFirst">Remove</button>
          </td>
         </tr>

@@ -1,18 +1,16 @@
-<h2 mat-dialog-title>Add A Card To:</h2>
-<h2 mat-dialog-title>{{course.description}}</h2>
-<h2 mat-dialog-title>{{schedule.data.description}}</h2>
+<h2 mat-dialog-title>Add A Card To: {{schedule.data.description}}</h2>
 
 <mat-dialog-content [formGroup]="form">
 
     <mat-form-field>
 
         <input matInput
-                placeholder="Course Description"
+                placeholder="Description"
                formControlName="description">
 
     </mat-form-field>
 
-    <mat-form-field>
+    <!-- <mat-form-field>
 
         <mat-select placeholder="Select category"
             formControlName="category">
@@ -26,9 +24,9 @@
 
         </mat-select>
 
-    </mat-form-field>
+    </mat-form-field> -->
 
-    <mat-form-field>
+    <!-- <mat-form-field>
 
         <input matInput [matDatepicker]="myDatepicker" #searchInput
             formControlName="releasedAt">
@@ -40,11 +38,11 @@
 
         <mat-datepicker #myDatepicker></mat-datepicker>
 
-    </mat-form-field>
+    </mat-form-field> -->
 
     <mat-form-field>
 
-        <textarea matInput placeholder="Description"
+        <textarea matInput placeholder="Image"
             formControlName="longDescription">
 
         </textarea>

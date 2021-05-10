@@ -8,6 +8,7 @@ import {fromEvent, noop, scheduled} from 'rxjs';
 import {concatMap, distinctUntilChanged, exhaustMap, filter, mergeMap, tap} from 'rxjs/operators';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {Store} from '../common/store.service';
+import { CardPosition } from '../common/services/cardposition.model';
 
 @Component({
     selector: 'course-dialog',
@@ -20,6 +21,7 @@ export class CourseDialogComponent implements AfterViewInit {
 
     course: Course;
     schedule: ScheduleRootObject;
+    cp: CardPosition;
 
     @ViewChild('saveButton', { static: true }) saveButton: ElementRef;
 
@@ -30,15 +32,18 @@ export class CourseDialogComponent implements AfterViewInit {
         private dialogRef: MatDialogRef<CourseDialogComponent>,
         @Inject(MAT_DIALOG_DATA) course:Course,
         @Inject(MAT_DIALOG_DATA) schedule:ScheduleRootObject,
+        @Inject(MAT_DIALOG_DATA) card:CardPosition,
         private store:Store) {
 
         this.course = course;
-        this.schedule = schedule;
+        this.schedule = card.schedule ; //schedule;
+        this.cp = card;
 
         this.form = fb.group({
-            description: [course.description, Validators.required],
-            category: [course.category, Validators.required],
-            releasedAt: [moment(), Validators.required],
+            //description: [course.description, Validators.required],
+            description: [card.schedule.data.row[this.cp.position]?.name, Validators.required],
+           // category: [course.category, Validators.required],
+            // releasedAt: [moment(), Validators.required],
             longDescription: [course.longDescription,Validators.required]
         });
 
@@ -52,6 +57,9 @@ export class CourseDialogComponent implements AfterViewInit {
     }
 
     save() {
+      console.log(`card= t${this.cp}`);
+      console.log(this.form.value);
+
       this.store.saveSchedule(this.schedule);
     //     this.store.saveCourse(this.course.id, this.form.value)
     //         .subscribe(
@@ -64,7 +72,8 @@ export class CourseDialogComponent implements AfterViewInit {
 
 
     close() {
-        this.dialogRef.close();
+      console.log(this.form.value);
+      this.dialogRef.close();
     }
 
 
