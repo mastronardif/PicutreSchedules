@@ -1,14 +1,12 @@
-<h2 mat-dialog-title>Add A Card To: {{schedule.data.description}}</h2>
+<h2 mat-dialog-title>Add A Card To: {{cp.schedule.data.description}}</h2>
 
 <mat-dialog-content [formGroup]="form">
 
-    <mat-form-field>
-
+    <!-- <mat-form-field>
         <input matInput
                 placeholder="Description"
                formControlName="description">
-
-    </mat-form-field>
+    </mat-form-field> -->
 
     <!-- <mat-form-field>
 
@@ -41,13 +39,38 @@
     </mat-form-field> -->
 
     <mat-form-field>
-
-        <textarea matInput placeholder="Image"
-            formControlName="longDescription">
-
+      <mat-label>Name</mat-label>
+        <textarea matInput  cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
+            formControlName="name">
         </textarea>
-
     </mat-form-field>
+    <hr/><hr/>
+    <mat-form-field>
+      <!-- <p style="background-color: aqua;">
+        Value: {{  cp.schedule.data.description }}
+      </p> -->
+      <!-- <input #firstNameInput type="text" > -->
+      <textarea #firstNameInput style="background-color: rgb(136, 255, 0);" matInput placeholder="Picture"
+          formControlName="picture">
+      </textarea>
+      <button (click)="show(firstNameInput)">Show</button>
+      <!-- <input  type="text" value={{firstNameInput.value}}> -->
+
+      <!-- <textarea #myTestDiv style="background-color: rgb(136, 255, 0);" matInput placeholder="Picture"
+          formControlName="picture">
+      </textarea> -->
+
+      <!-- <mat-card class="example-card">
+        <img width="100px" mat-card-image src="{{firstNameInput.value}}" alt="Photo of a Shiba Inu">
+      </mat-card> -->
+<!--
+      <img width="100px" class="course-thumbnail ng-star-inserted" [src] =firstNameInput.value> -->
+      <img mat-card-image width="200px" [src]=firstNameInput.value alt="wtf">
+      <!-- <img class="course-thumbnail ng-star-inserted" src ="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ99A5VYs3sY38Lt2_K7TQAKPpF_FZlAYrMdbSX2QGHO4y4Erzzf2GBlSjFH4mlBaw4eMkFT6I0eQ&usqp=CAc">
+      <img class="course-thumbnail ng-star-inserted" src ="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ99A5VYs3sY38Lt2_K7TQAKPpF_FZlAYrMdbSX2QGHO4y4Erzzf2GBlSjFH4mlBaw4eMkFT6I0eQ&usqp=CAc"> -->
+
+  </mat-form-field>
 
 
 </mat-dialog-content>

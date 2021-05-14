@@ -110,12 +110,13 @@ export class Store {
     console.log('saving '+schedule);
 
 
-const format1 = "YYYY-MM-DD HH:mm:ss"
-var date1 = new Date();
+    //const format1 = "YYYY-MM-DD HH:mm:ss"
+    //var date1 = new Date();
 
-const dateTime1 = moment(date1).format(format1);
+    //const dateTime1 = moment(date1).format(format1);
 
-    schedule.data.description= dateTime1+ schedule.data.description;
+    //schedule.data.description= dateTime1+ schedule.data.description;
+    schedule.data.description= schedule.data.description;
     console.log(schedule);
 
     this.dataService.createAndStoreSchedule(schedule, 'content');

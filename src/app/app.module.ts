@@ -27,9 +27,10 @@ import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import {HttpClientModule} from "@angular/common/http";
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule} from "@angular/forms";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import { ScheduleComponent } from './component/schedule/schedule.component';
+import { SafePipe } from './common/pipes/safe.pipe';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { ScheduleComponent } from './component/schedule/schedule.component';
         //CoursesCardListComponent,
         SchedulesCardListComponent,
         CourseDialogComponent,
-        ScheduleComponent
+        ScheduleComponent,
+        SafePipe
     ],
     imports: [
         BrowserModule,

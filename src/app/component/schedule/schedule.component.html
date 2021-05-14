@@ -35,7 +35,7 @@
         <tr>
           <td class="seqno-cell">{{index+1}}</td>
           <td class="description-cell">
-            <img class="course-thumbnail ng-star-inserted" [src] ="itt.picture">
+            <img class="course-thumbnail ng-star-inserted" [src] ="itt.picture  | safe: 'url'">
             <br/>
             {{itt.name}}
           </td>
