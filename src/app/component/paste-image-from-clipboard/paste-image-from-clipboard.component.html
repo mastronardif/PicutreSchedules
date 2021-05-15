@@ -1,0 +1,17 @@
+<p>paste-image-from-clipboard works!</p>
+
+<div style="background-color: aquamarine;">
+<h2>
+  Pasted Images below
+</h2>
+<p class="images" >
+  <ng-template ngFor let-imageUrl [ngForOf]="imageUrls">
+    <img [src]="imageUrl" class="image" />
+  </ng-template>
+</p>
+</div>
+<hr/>
+<!-- <div class="container" (paste)="onPaste22($event)">
+  <h1>PasteFromClipboardComponent22</h1>
+  <img #imgRenderer />
+</div> -->

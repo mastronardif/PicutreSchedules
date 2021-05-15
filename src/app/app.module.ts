@@ -31,7 +31,8 @@ import { ReactiveFormsModule} from "@angular/forms";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import { ScheduleComponent } from './component/schedule/schedule.component';
 import { SafePipe } from './common/pipes/safe.pipe';
-
+import { PasteImageFromClipboardComponent } from './component/paste-image-from-clipboard/paste-image-from-clipboard.component';
+import { PasteFromClipboardComponent22 } from './component/paste-image-from-clipboard22';
 @NgModule({
     declarations: [
         AppComponent,
@@ -42,7 +43,9 @@ import { SafePipe } from './common/pipes/safe.pipe';
         SchedulesCardListComponent,
         CourseDialogComponent,
         ScheduleComponent,
-        SafePipe
+        SafePipe,
+        PasteImageFromClipboardComponent,
+        PasteFromClipboardComponent22
     ],
     imports: [
         BrowserModule,
