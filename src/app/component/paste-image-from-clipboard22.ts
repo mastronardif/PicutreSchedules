@@ -8,7 +8,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
   template: /*html*/`
     <div class="container" (paste)="onPaste($event)">
       <h1>22</h1>
-      <input type="text" id="lname" name="lname"><br/>
+      <input type="text" placeholder="Paste Image here! Cheesy for now!" id="lname" name="lname"><br/>
       <img #imgRenderer />
     </div>
   `

@@ -1,4 +1,15 @@
 
+<div style="visibility: hidden; position: fixed"
+[style.left]="contextMenuPosition.x"
+[style.top]="contextMenuPosition.y"
+[matMenuTriggerFor]="contextMenu">
+</div>
+<mat-menu #contextMenu="matMenu">
+	<ng-template matMenuContent let-item="item">
+		<button mat-menu-item (click)="onContextMenuAction1(item)">PastE 1</button>
+		<button mat-menu-item (click)="onContextMenuAction2(item)">Action 2</button>
+	</ng-template>
+</mat-menu>
 
 <div class="about">
     <h2>Picture Schedules</h2>
@@ -13,7 +24,26 @@
   last modified: May 21
 </P>
 </div>
+<hr/><hr/>
+<h1>Simple Quill Editor</h1><button (click)="saveQuil()">Save</button>
+<button (click)="getQuil()">Get</button>
+<div class="form-group">
+<input type="text" #alterEgo [(ngModel)]="alterEgo2" placeholder="alt ego">
 
+</div>
+
+<quill-editor #fuck [(ngModel)]="content" trackChanges="all"  [styles]="{height: '200px'}"
+  (onFocus)="focus($event)"
+	(onEditorChanged)="changedEditor($event)"
+	(onBlur)="blur($event)"
+  (onEditorCreated)="created($event)"></quill-editor>
+
+<quill-view-html [content]="content" theme="snow"></quill-view-html>
+
+<div style="background-color: sandybrown;">
+<paste-image-from-clipboard22 id="idfuck"></paste-image-from-clipboard22>
+</div>
+<hr/>
 <div style="background-color: salmon;">
   <h2>Test Area</h2>
   <paste-image-from-clipboard>
@@ -21,7 +51,18 @@
   </paste-image-from-clipboard>
 </div>
 <hr/>
-<div style="background-color: sandybrown;">
-<paste-image-from-clipboard22></paste-image-from-clipboard22>
+<div class="div2" (contextmenu)="onContextMenu($event, {id: 1, name: 'mypaste'})">aaaaaa</div>
+
+<hr>
+<div class="drop">
+	<div class="cont">
+		<div class="desc">
+			drop / paste here your images
+		</div>
+	</div>
+	<div class="abc">
+		<img class="img-responsive drag" style="border-radius: 8px;">
+  </div>
+		<input type="file" id="files" multiple (change)="detectFiles($event)" accept="image/*">
 </div>
 

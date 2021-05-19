@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -33,6 +33,9 @@ import { ScheduleComponent } from './component/schedule/schedule.component';
 import { SafePipe } from './common/pipes/safe.pipe';
 import { PasteImageFromClipboardComponent } from './component/paste-image-from-clipboard/paste-image-from-clipboard.component';
 import { PasteFromClipboardComponent22 } from './component/paste-image-from-clipboard22';
+import { QuillModule } from 'ngx-quill';
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -49,6 +52,7 @@ import { PasteFromClipboardComponent22 } from './component/paste-image-from-clip
     ],
     imports: [
         BrowserModule,
+        FormsModule,
         BrowserAnimationsModule,
         HttpClientModule,
         MatMenuModule,
@@ -69,7 +73,8 @@ import { PasteFromClipboardComponent22 } from './component/paste-image-from-clip
         MatSelectModule,
         MatDatepickerModule,
         MatMomentDateModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        QuillModule.forRoot()
     ],
     providers: [
 

@@ -106,7 +106,7 @@ export class PasteImageFromClipboardComponent implements OnInit {
 
         const reader = new FileReader();
         reader.onload = (evt: any) => {
-          console.log(evt.target.result); // data url!
+          ////console.log(evt.target.result); // data url!
           //this.imgRenderer.nativeElement.src = evt.target.result;
         };
         reader.readAsDataURL(blob);
