@@ -1,23 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../common/services/data.service';
 import { Post } from '../../common/services/post.model';
 
 @Component({
   selector: 'listsquills',
-  templateUrl: './listsquills.component.html',
-  styleUrls: ['./listsquills.component.scss']
+  templateUrl: './listquills.component.html',
+  styleUrls: ['./listquills.component.scss']
 })
-export class ListsquillsComponent implements OnInit {
+export class ListquillsComponent implements OnInit {
   loadedPosts: Post[] = [];
   isFetching = false;
   error = null;
+  id: string;
   private errorSub: Subscription;
 
 
-  constructor(private postsService: DataService) { }
+  constructor(private route: ActivatedRoute, private postsService: DataService) { }
 
   ngOnInit(): void {
+
+    let id = this.route.firstChild?.snapshot.params['id'];
+
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      //this.editMode = params['id'] != null;
+      //this.initForm();
+    });
+
     this.errorSub = this.postsService.error.subscribe(errorMessage => {
       this.error = errorMessage;
     });

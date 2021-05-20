@@ -21,15 +21,15 @@ export class SchedulesCardListComponent implements OnInit {
 
     }
 
-    onViewSchedule(id: string) {
-      console.log('\t onViewSchedule '+ id + ' '+ this.route);
-      this.router.navigate(['fuck/view', id]);
-    }
+    // onViewSchedule(id: string) {
+    //   console.log('\t onViewSchedule '+ id + ' '+ this.route);
+    //   this.router.navigate(['fuck/view', id]);
+    // }
 
-    onEditSchedule(id: string) {
-      console.log('\t onEditSchedule '+ id + ' '+ this.route);
-      this.router.navigate(['fuck/edit', id]);
-    }
+    // onEditSchedule(id: string) {
+    //   console.log('\t onEditSchedule '+ id + ' '+ this.route);
+    //   this.router.navigate(['fuck/edit', id]);
+    // }
 
     // editCourse(course:Course) {
 

@@ -4,7 +4,8 @@ import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { CourseComponent } from "./course/course.component";
 import { ScheduleComponent } from "./component/schedule/schedule.component";
-import { ListsquillsComponent } from "./component/listsquills/listsquills.component";
+import { ListquillsComponent } from "./component/listquills/listquills.component";
+import { QuillComponent } from "./component/quill/quill.component";
 
 
 const routes: Routes = [
@@ -18,7 +19,15 @@ const routes: Routes = [
   },
   {
     path: "listquills",
-    component: ListsquillsComponent,
+    component: ListquillsComponent,
+  },
+  {
+    path: 'quills', component: QuillComponent,
+    children: [
+      { path: 'view/:id', component: QuillComponent },
+      { path: 'edit/:id', component: QuillComponent },
+      { path: 'new', component: QuillComponent },
+    ]
   },
   {
     path: 'schedules', component: ScheduleComponent,
@@ -48,7 +57,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: "legacy" })],
+  imports: [RouterModule.forRoot(routes/*, { enableTracing: true }*/)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

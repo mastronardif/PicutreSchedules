@@ -34,7 +34,8 @@ import { SafePipe } from './common/pipes/safe.pipe';
 import { PasteImageFromClipboardComponent } from './component/paste-image-from-clipboard/paste-image-from-clipboard.component';
 import { PasteFromClipboardComponent22 } from './component/paste-image-from-clipboard22';
 import { QuillModule } from 'ngx-quill';
-import { ListsquillsComponent } from './component/listsquills/listsquills.component';
+import { ListquillsComponent } from './component/listquills/listquills.component';
+import { QuillComponent } from './component/quill/quill.component';
 
 
 @NgModule({
@@ -50,7 +51,9 @@ import { ListsquillsComponent } from './component/listsquills/listsquills.compon
         SafePipe,
         PasteImageFromClipboardComponent,
         PasteFromClipboardComponent22,
-        ListsquillsComponent
+        ListquillsComponent,
+        //QuillsComponent,
+        QuillComponent
     ],
     imports: [
         BrowserModule,

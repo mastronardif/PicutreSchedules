@@ -31,7 +31,7 @@ export class ScheduleComponent implements OnInit {
   constructor(private dialog: MatDialog, private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
-    let iii = this.route.snapshot.paramMap.get('id');
+    //let iii = this.route.snapshot.paramMap.get('id');
     let id = this.route.firstChild?.snapshot.params['id'];
 
     this.route.params.subscribe((params: Params) => {
