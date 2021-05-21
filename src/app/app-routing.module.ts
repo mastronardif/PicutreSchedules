@@ -5,7 +5,7 @@ import { AboutComponent } from "./about/about.component";
 import { CourseComponent } from "./course/course.component";
 import { ScheduleComponent } from "./component/schedule/schedule.component";
 import { ListquillsComponent } from "./component/listquills/listquills.component";
-import { QuillComponent } from "./component/quill/quill.component";
+import { QuillComponent } from "./component/listquills/quill/quill.component";
 
 
 const routes: Routes = [
