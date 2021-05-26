@@ -14,7 +14,8 @@
       <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
       <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching">
         <li class="list-group-item" *ngFor="let post of loadedPosts; index as ii;">
-          <h3> TOUCH {{ii}}. {{ post.title }}</h3>
+          <h3> TOUCH {{ii}}. <span style="background-color: aquamarine;">{{post.id}}</span> <span style="background-color: lightcoral;">{{ post.title }}</span></h3>
+
           <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/quills/new']">
             NEW()
           </button>

@@ -10,7 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import {MatTabsModule } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 //import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 import { SchedulesCardListComponent } from './component/schedules-card-list/schedules-card-list.component';
 import {CourseComponent } from "./course/course.component";
@@ -27,8 +29,8 @@ import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { HttpClientModule } from "@angular/common/http";
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
-import { ReactiveFormsModule} from "@angular/forms";
-import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { ScheduleComponent } from './component/schedule/schedule.component';
 import { SafePipe } from './common/pipes/safe.pipe';
 import { PasteImageFromClipboardComponent } from './component/paste-image-from-clipboard/paste-image-from-clipboard.component';
@@ -55,6 +57,7 @@ import { QuillComponent } from './component/listquills/quill/quill.component';
         QuillComponent
     ],
     imports: [
+        AngularFireModule.initializeApp(environment.firebase, 'crud'),
         BrowserModule,
         FormsModule,
         BrowserAnimationsModule,
