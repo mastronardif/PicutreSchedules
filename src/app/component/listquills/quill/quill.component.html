@@ -10,6 +10,8 @@
 
   <div *ngIf="editMode=='EDIT'">
     <button (click)="saveQuil()">Save</button>
+    <button (click)="createQuill()">Create</button>
+    <button (click)="updateQuil({})">Update</button>
 
     <quill-editor formControlName="fuck22" trackChanges="all"  [styles]="{height: '200px'}"></quill-editor>
   </div>
@@ -19,28 +21,15 @@
     <input type="text" formControlName="firstName" required>
   </label>
   </div> -->
-
-  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+<!--
+  <button type="submit" [disabled]="!profileForm.valid">Submit</button> -->
 </form>
 
 <p style="background-color: lightgreen;">quill works!<br/>
   editMode= {{editMode}}<br/>
   scheduleId= {{scheduleId}}<br/>
-  idd = {{idd}}
+  title= {{title}}<br/>
+  id = {{idd}}<br/>
   </p>
-  <h2>{{title}}</h2>
-  <div *ngIf="editMode=='EDIT'">
-    <button (click)="saveQuil()">Save</button>
-
-    <!-- <mat-form-field>
-    <mat-label>Name</mat-label>
-    <textarea matInput  cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-    cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
-       >
-    </textarea>
-  </mat-form-field> -->
-
-    <!-- <quill-editor #fuck [(ngModel)]="content" trackChanges="all"  [styles]="{height: '200px'}"></quill-editor> -->
-  </div>
 
   <quill-view-html *ngIf="editMode!='EDIT'" [content]="content" theme="snow"></quill-view-html>

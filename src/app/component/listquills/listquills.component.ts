@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../common/services/data.service';
+import { Quill } from '../../common/services/models/tag.model';
 import { Post } from '../../common/services/post.model';
+import { TagService } from '../../common/services/tag.service';
 
 @Component({
   selector: 'listsquills',
@@ -17,7 +19,7 @@ export class ListquillsComponent implements OnInit {
   private errorSub: Subscription;
 
 
-  constructor(private route: ActivatedRoute, private postsService: DataService) { }
+  constructor(private route: ActivatedRoute, private postsService: DataService, private tagService: TagService) { }
 
   ngOnInit(): void {
 
@@ -29,6 +31,30 @@ export class ListquillsComponent implements OnInit {
       //this.initForm();
     });
 
+    //
+    this.errorSub = this.tagService.getQuills().subscribe(errorMessage => {
+      this.error = errorMessage;
+    });
+
+    this.tagService.getQuills().subscribe(data=>{
+      console.log('ddd');
+      console.log(data);
+      //  this.loadedPosts = posts;
+      this.loadedPosts = data.map((dd) => {
+        const myVar1 = dd.payload.doc.data() as Quill;
+
+        return {
+          data: dd.payload.doc.data(),
+          idDoc: dd.payload.doc.id,
+          ...myVar1,
+        } as Quill;
+      });
+      console.log('eeeeeeeeeee fuck = ');
+      console.log(this.loadedPosts);
+    });
+
+    //
+
     this.errorSub = this.postsService.error.subscribe(errorMessage => {
       this.error = errorMessage;
     });
@@ -37,7 +63,7 @@ export class ListquillsComponent implements OnInit {
     this.postsService.fetchPosts().subscribe(
       posts => {
         this.isFetching = false;
-        this.loadedPosts = posts;
+        ////this.loadedPosts = posts;
       },
       error => {
         this.isFetching = false;

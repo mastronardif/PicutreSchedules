@@ -1,35 +1,27 @@
 <p>listsquills works!</p>
 
-<ul>
-  <li> set opbservables</li>
-  <li> list</li>
-  <li> show woking icon</li>
-  <li> allow touch row</li>
-</ul>
-
-
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
       <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching">
         <li class="list-group-item" *ngFor="let post of loadedPosts; index as ii;">
-          <h3> TOUCH {{ii}}. <span style="background-color: aquamarine;">{{post.id}}</span> <span style="background-color: lightcoral;">{{ post.title }}</span></h3>
+          <h3> {{ii}}. <span style="background-color: aquamarine;">{{post.idDoc}}</span> <span style="background-color: lightcoral;">{{ post.title }}</span></h3>
 
           <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/quills/new']">
             NEW()
           </button>
-          <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/quills/view', ii]">
+          <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/quills/view',  post.idDoc]">
             VIEW({{ii}})
           </button>
 
-          <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/quills/edit', ii]">
+          <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/quills/edit', post.idDoc]">
             EDIT({{ii}})
           </button>
 
-          <nav>
+          <!-- <nav>
             <a routerLink="/quills/view/-M_alsbCaayW8IOf05OG">{{ii}}</a>
-          </nav>
+          </nav> -->
 
           <p>{{ post.content }}</p>
         </li>
@@ -38,7 +30,3 @@
     </div>
   </div>
 </div>
-<!-- rrrrr
-<div style="background-color: green;">
-<router-outlet></router-outlet>
-</div> -->
