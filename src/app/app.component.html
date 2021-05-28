@@ -3,19 +3,28 @@
     <mat-sidenav #start (click)="start.close()">
         <mat-nav-list>
 
+            <a mat-list-item routerLink="listquills">
+            <mat-icon>library_books</mat-icon>
+            <span>LIst Quills</span>
+            </a>
+
             <a mat-list-item routerLink="/">
                 <mat-icon>library_books</mat-icon>
                 <span>Schedules</span>
             </a>
-
+            <!-- <a mat-list-item routerLink="quills/new">
+              <mat-icon>question_answer</mat-icon>
+              <span>New Guy</span>
+            </a> -->
+            <a mat-list-item routerLink="newquil">
+              <mat-icon>question_answer</mat-icon>
+              <span>New Guy</span>
+            </a>
             <a mat-list-item routerLink="about">
                 <mat-icon>question_answer</mat-icon>
                 <span>About</span>
             </a>
-            <a mat-list-item routerLink="listquills">
-              <mat-icon>library_books</mat-icon>
-              <span>LIst Quills</span>
-          </a>
+
             <a mat-list-item>
                 <mat-icon>person_add</mat-icon>
                 <span>Register</span>

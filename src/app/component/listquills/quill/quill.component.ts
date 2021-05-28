@@ -7,7 +7,6 @@ import { DataService } from "../../../common/services/data.service";
 import { Post } from "../../../common/services/post.model";
 import { Quill, Tag } from "../../../common/services/models/tag.model";
 import { TagService } from "../../../common/services/tag.service";
-
 @Component({
   selector: "quill",
   templateUrl: "./quill.component.html",
@@ -48,15 +47,22 @@ export class QuillComponent implements OnInit {
     console.log(
       `\t this.route.firstChild?.snapshot.url[0].path = ${this.route.firstChild?.snapshot.url[0].path}`
     );
+    //this.editMode = this.route.firstChild?.snapshot.url[0].path == "edit" ? "EDIT" : null;
+    this.editMode = this.getMode(this.route);
+    //const pii = this.route.snapshot.routeConfig.path;
 
-    this.editMode =
-      this.route.firstChild?.snapshot.url[0].path == "edit" ? "EDIT" : null;
+    console.log(`path part= ${this.route.firstChild?.snapshot.url[0].path}`);
     //this.mode = this.route.snapshot.url[0].path == 'schedules_edit_child' ? 'EDIT' : null; // schedules_edit_child FM fix this route child stuff.
     //this.courseId = this.route.snapshot.params["id"];
     //this.scheduleId = id; //;this.route.snapshot.params["id"];
 
     //// this.schedule$ = this.store.selectScheduleById(this.scheduleId);
     ////this.getQuil(id);
+
+    if (this.editMode === 'NEW') {
+      this.id = this.tagService.getNewQuillTemplateID();
+    }
+
     this.getQuill22(this.id); //"aEycvJtEMfFCtV6I4l73"); //'aEycvJtEMfFCtV6I4l73');
 
     // const initialLessons$ = this.loadLessons();
@@ -64,16 +70,16 @@ export class QuillComponent implements OnInit {
     // this.lessons$ = concat(initialLessons$);
   }
 
-  saveQuil() {
-    console.log("\t saveQuil()");
-    console.log(this.content);
+  // saveQuil() {
+  //   console.log("\t saveQuil()");
+  //   console.log(this.content);
 
-    console.log(this.profileForm.get("description").value);
-    console.log(this.profileForm.get("fuck22").value);
-    let desc = this.profileForm.get("description").value;
-    let data = this.profileForm.get("fuck22").value;
-    this.dataService.createAndStorePostSchedule(desc, data);
-  }
+  //   console.log(this.profileForm.get("description").value);
+  //   console.log(this.profileForm.get("fuck22").value);
+  //   let desc = this.profileForm.get("description").value;
+  //   let data = this.profileForm.get("fuck22").value;
+  //   this.dataService.createAndStorePostSchedule(desc, data);
+  // }
 
   createQuill() {
     let desc = this.profileForm.get("description").value;
@@ -89,7 +95,7 @@ export class QuillComponent implements OnInit {
     const quill: Quill = {
       title: desc,
       content: data,
-      id: "aEycvJtEMfFCtV6I4l73",
+      id: this.id,
     };
 
     this.tagService.updateQuill(this.id, quill);
@@ -152,6 +158,32 @@ export class QuillComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
+  }
+
+  //getMode(part: string): string {
+  getMode(route: ActivatedRoute): string {
+    let retVal: string = '';
+
+    const part = route.firstChild?.snapshot.url[0].path;
+    if (this.route.snapshot.routeConfig.path === 'newquil')
+      return "NEW"
+
+    switch (part) {
+      case "edit": {
+        retVal = "EDIT";
+        break;
+      }
+      // case "new": {
+      //   retVal = "NEW";
+      //   break;
+      // }
+      default:
+        {
+          retVal = "VIEW";
+          break;
+        }
+    }
+    return retVal;
   }
 }
 function getQuil() {

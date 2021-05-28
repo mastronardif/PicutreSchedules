@@ -8,10 +8,11 @@
     </textarea>
   </mat-form-field>
 
-  <div *ngIf="editMode=='EDIT'">
-    <button (click)="saveQuil()">Save</button>
-    <button (click)="createQuill()">Create</button>
-    <button (click)="updateQuil({})">Update</button>
+  <div *ngIf="editMode=='EDIT' || editMode=='NEW'">
+    <!-- <button (click)="saveQuil()">Save</button> -->
+
+    <button *ngIf="editMode=='NEW'" (click)="createQuill()">Create</button>
+    <button *ngIf="editMode=='EDIT'"(click)="updateQuil({})">Update</button>
 
     <quill-editor formControlName="fuck22" trackChanges="all"  [styles]="{height: '200px'}"></quill-editor>
   </div>
@@ -32,4 +33,4 @@
   id = {{idd}}<br/>
   </p>
 
-  <quill-view-html *ngIf="editMode!='EDIT'" [content]="content" theme="snow"></quill-view-html>
+  <quill-view-html *ngIf="editMode=='VIEW'" [content]="content" theme="snow"></quill-view-html>

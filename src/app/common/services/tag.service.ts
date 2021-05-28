@@ -19,6 +19,10 @@ export class TagService {
     this.firestore.doc("quills/" + id).update(quill);
   }
 
+  getNewQuillTemplateID(): string {
+    return '0000';
+  }
+
   getQuill(id: string): Observable<any> {
     var docRef = this.firestore
       .collection("quills")

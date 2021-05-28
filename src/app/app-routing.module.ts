@@ -26,8 +26,12 @@ const routes: Routes = [
     children: [
       { path: 'view/:id', component: QuillComponent },
       { path: 'edit/:id', component: QuillComponent },
-      { path: 'new', component: QuillComponent },
+      // { path: 'new', component: QuillComponent },
     ]
+  },
+  {
+    path: "newquil",
+    component: QuillComponent,
   },
   {
     path: 'schedules', component: ScheduleComponent,
