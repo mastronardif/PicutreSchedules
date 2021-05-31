@@ -6,6 +6,7 @@ import { Quill, Tag } from "./models/tag.model";
 @Injectable({
   providedIn: "root",
 })
+
 export class TagService {
   constructor(private firestore: AngularFirestore) {}
 
@@ -13,20 +14,33 @@ export class TagService {
     return this.firestore.collection("quills").add(quill);
   }
 
-  updateQuill(id: string, quill: Quill) {
+  deleteQuill(id: string) {
+    console.log(`deleteQuill(${id})`);
+    this.firestore.doc("quills/" + id).delete();
+  }
+
+  async updateQuill(id: string, quill: Quill): Promise<void> {
     //delete policy.id;
     //this.firestore.doc('policies/' + policy.id).update(policy);
-    this.firestore.doc("quills/" + id).update(quill);
+    try {
+      await this.firestore.doc("quills/" + id).update(quill);
+      // Processing succeed
+      return;
+    }  catch (error) {
+
+      // Process your error here
+      console.log(error);
+
+  }
+    //this.firestore.doc("quills/" + id).update(quill);
   }
 
   getNewQuillTemplateID(): string {
-    return '0000';
+    return "0000";
   }
 
   getQuill(id: string): Observable<any> {
-    var docRef = this.firestore
-      .collection("quills")
-      .doc(id); //"jaEycvJtEMfFCtV6I4l73");
+    var docRef = this.firestore.collection("quills").doc(id); //"jaEycvJtEMfFCtV6I4l73");
 
     //   docRef.get().toPromise().then((doc) => {
     //     if (doc.exists) {

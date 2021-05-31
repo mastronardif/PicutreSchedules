@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +38,7 @@ import { PasteFromClipboardComponent22 } from './component/paste-image-from-clip
 import { QuillModule } from 'ngx-quill';
 import { ListquillsComponent } from './component/listquills/listquills.component';
 import { QuillComponent } from './component/listquills/quill/quill.component';
+import { MyErrorHandler } from './common/myerrorhandler';
 
 
 @NgModule({
@@ -84,7 +85,7 @@ import { QuillComponent } from './component/listquills/quill/quill.component';
         QuillModule.forRoot()
     ],
     providers: [
-
+      {provide: ErrorHandler, useClass: MyErrorHandler}
     ],
     bootstrap: [AppComponent],
     entryComponents: [CourseDialogComponent]

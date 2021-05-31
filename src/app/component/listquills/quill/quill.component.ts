@@ -81,6 +81,10 @@ export class QuillComponent implements OnInit {
   //   this.dataService.createAndStorePostSchedule(desc, data);
   // }
 
+  // deleteQuill(id: string) {
+  //   console.log(`deleteQuill(${id})`);
+  //   //this.firestore.doc('policies/' + policyId).delete();
+  // }
   createQuill() {
     let desc = this.profileForm.get("description").value;
     let data = this.profileForm.get("fuck22").value;
@@ -91,7 +95,7 @@ export class QuillComponent implements OnInit {
 
   updateQuil(policy: Tag) {
     let desc = this.profileForm.get("description").value;
-    let data = this.profileForm.get("fuck22").value;
+    let data = this.profileForm.get("fuck22").value  || '';
     const quill: Quill = {
       title: desc,
       content: data,

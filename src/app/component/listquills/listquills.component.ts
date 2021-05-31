@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { DataService } from '../../common/services/data.service';
-import { Quill } from '../../common/services/models/tag.model';
-import { Post } from '../../common/services/post.model';
-import { TagService } from '../../common/services/tag.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
+import { Subscription } from "rxjs";
+import { DataService } from "../../common/services/data.service";
+import { Quill } from "../../common/services/models/tag.model";
+import { Post } from "../../common/services/post.model";
+import { TagService } from "../../common/services/tag.service";
 
 @Component({
-  selector: 'listsquills',
-  templateUrl: './listquills.component.html',
-  styleUrls: ['./listquills.component.scss']
+  selector: "listsquills",
+  templateUrl: "./listquills.component.html",
+  styleUrls: ["./listquills.component.scss"],
 })
 export class ListquillsComponent implements OnInit {
   loadedPosts: Post[] = [];
@@ -18,26 +18,28 @@ export class ListquillsComponent implements OnInit {
   id: string;
   private errorSub: Subscription;
 
-
-  constructor(private route: ActivatedRoute, private postsService: DataService, private tagService: TagService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private postsService: DataService,
+    private tagService: TagService
+  ) {}
 
   ngOnInit(): void {
-
-    let id = this.route.firstChild?.snapshot.params['id'];
+    let id = this.route.firstChild?.snapshot.params["id"];
 
     this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
+      this.id = params["id"];
       //this.editMode = params['id'] != null;
       //this.initForm();
     });
 
     //
-    this.errorSub = this.tagService.getQuills().subscribe(errorMessage => {
+    this.errorSub = this.tagService.getQuills().subscribe((errorMessage) => {
       this.error = errorMessage;
     });
 
-    this.tagService.getQuills().subscribe(data=>{
-      console.log('ddd');
+    this.tagService.getQuills().subscribe((data) => {
+      console.log("ddd");
       console.log(data);
       //  this.loadedPosts = posts;
       this.loadedPosts = data.map((dd) => {
@@ -49,29 +51,35 @@ export class ListquillsComponent implements OnInit {
           ...myVar1,
         } as Quill;
       });
-      console.log('eeeeeeeeeee fuck = ');
+      console.log("eeeeeeeeeee fuck = ");
       console.log(this.loadedPosts);
     });
 
     //
 
-    this.errorSub = this.postsService.error.subscribe(errorMessage => {
+    this.errorSub = this.postsService.error.subscribe((errorMessage) => {
       this.error = errorMessage;
     });
 
     this.isFetching = true;
     this.postsService.fetchPosts().subscribe(
-      posts => {
+      (posts) => {
         this.isFetching = false;
         ////this.loadedPosts = posts;
       },
-      error => {
+      (error) => {
         this.isFetching = false;
         this.error = error.message;
       }
     );
-
   }
 
-
+  deleteQuill(id: string) {
+    // cheesy for now!
+    if (this.tagService.getNewQuillTemplateID() === id) {
+      return;
+    }
+    console.log(`deleteQuill(${id})`);
+    this.tagService.deleteQuill(id);
+  }
 }
