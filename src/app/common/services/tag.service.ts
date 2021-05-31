@@ -22,17 +22,17 @@ export class TagService {
   async updateQuill(id: string, quill: Quill): Promise<void> {
     //delete policy.id;
     //this.firestore.doc('policies/' + policy.id).update(policy);
-    try {
-      await this.firestore.doc("quills/" + id).update(quill);
-      // Processing succeed
-      return;
-    }  catch (error) {
+  //   try {
+  //     await this.firestore.doc("quills/" + id).update(quill);
+  //     // Processing succeed
+  //     return;
+  //   }  catch (error) {
 
-      // Process your error here
-      console.log(error);
+  //     // Process your error here
+  //     console.log(error);
 
-  }
-    //this.firestore.doc("quills/" + id).update(quill);
+  // }
+    this.firestore.doc("quills/" + id).update(quill);
   }
 
   getNewQuillTemplateID(): string {

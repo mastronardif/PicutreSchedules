@@ -95,7 +95,7 @@ export class QuillComponent implements OnInit {
 
   updateQuil(policy: Tag) {
     let desc = this.profileForm.get("description").value;
-    let data = this.profileForm.get("fuck22").value  || '';
+    let data = this.profileForm.get("fuck22").value  || null;
     const quill: Quill = {
       title: desc,
       content: data,

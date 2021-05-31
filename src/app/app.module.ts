@@ -38,8 +38,10 @@ import { PasteFromClipboardComponent22 } from './component/paste-image-from-clip
 import { QuillModule } from 'ngx-quill';
 import { ListquillsComponent } from './component/listquills/listquills.component';
 import { QuillComponent } from './component/listquills/quill/quill.component';
-import { MyErrorHandler } from './common/myerrorhandler';
-
+//import { MyErrorHandler } from './common/myerrorhandler';
+import { CoreModule } from "./core/core.module";
+import { SharedModule } from "./shared/shared.module";
+import { TeststuffComponent } from './component/teststuff/teststuff.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +57,8 @@ import { MyErrorHandler } from './common/myerrorhandler';
         PasteImageFromClipboardComponent,
         PasteFromClipboardComponent22,
         ListquillsComponent,
-        QuillComponent
+        QuillComponent,
+        TeststuffComponent,
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebase, 'crud'),
@@ -82,10 +85,12 @@ import { MyErrorHandler } from './common/myerrorhandler';
         MatDatepickerModule,
         MatMomentDateModule,
         ReactiveFormsModule,
-        QuillModule.forRoot()
+        QuillModule.forRoot(),
+        CoreModule,
+        SharedModule
     ],
     providers: [
-      {provide: ErrorHandler, useClass: MyErrorHandler}
+     // {provide: ErrorHandler, useClass: MyErrorHandler}
     ],
     bootstrap: [AppComponent],
     entryComponents: [CourseDialogComponent]
