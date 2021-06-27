@@ -23,7 +23,17 @@ import { DataService } from "../common/services/data.service";
 import { Post } from "../common/services/post.model";
 import { createHttpObservable } from "../common/util";
 import { PasteFromClipboardComponent22 } from "../component/paste-image-from-clipboard22";
-
+//
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import jsPDF from 'jspdf';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import htmlToPdfmake from 'html-to-pdfmake';
+import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image-more';
+//
 @Component({
   selector: "about",
   templateUrl: "./about.component.html",
@@ -35,6 +45,12 @@ export class AboutComponent implements OnInit {
     { id: 2, name: "Item 2" },
     { id: 3, name: "Item 3" },
   ];
+
+  @ViewChild('screen') screen: ElementRef;
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
+
+  @ViewChild('pdfTable') pdfTable: ElementRef;
 
   @ViewChild('alterEgo') alterEgo: ElementRef;
   alterEgo2='';
@@ -51,6 +67,8 @@ export class AboutComponent implements OnInit {
   focused = false
   content = '';
   loadedPosts: Post[] = [];
+  imagePath = '';
+
   constructor(private dataService: DataService) {
 
   }
@@ -87,7 +105,38 @@ export class AboutComponent implements OnInit {
     alert(`Click on Action 2 for ${item.name}`);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    var node = document.getElementById('my-node');
+    console.log(this);
+    var bobo;
+    this.imagePath = bobo;
+
+    htmlToImage.toPng(document.getElementById('my-node'))
+    .then((dataUrl) => {
+      this.imagePath=dataUrl;
+      console.log(dataUrl);
+      //node.innerHTML=dataUrl;
+    })
+  // .then(function (dataUrl) {
+  //  console.log(dataUrl);
+  //  console.log(node)
+  //  node.innerHTML=dataUrl;
+  // })
+  .catch(function (error) {
+    console.error('oops, something went wrong!', error);
+  });
+
+  }
+
+  downloadImage(){
+    html2canvas(this.screen.nativeElement).then(canvas => {
+      this.canvas.nativeElement.src = canvas.toDataURL();
+      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+      this.downloadLink.nativeElement.download = 'marble-diagram.png';
+      this.downloadLink.nativeElement.click();
+    });
+  }
+
 
   detectFiles($event) {
     console.log("detectFiles");
@@ -151,9 +200,19 @@ export class AboutComponent implements OnInit {
     this.focused = false
     this.blured = true
   }
-
-
   ////////////////////
+
+  public downloadAsPDF() {
+    const doc = new jsPDF();
+
+    const pdfTable = this.pdfTable.nativeElement;
+
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).open();
+
+  }
 }
 
 export interface Item {

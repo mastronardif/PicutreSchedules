@@ -1,0 +1,82 @@
+<p>search by Tags and or text
+
+<!--
+  <label for="site-search">Search the site:</label>
+<input type="search" id="site-search" name="q"
+       aria-label="Search through site content">
+
+<button (click)="searchBy()">Search</button> -->
+
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Search</mat-label>
+  <input [(ngModel)]="email" type="search" matInput placeholder="" value="">
+</mat-form-field>
+<button mat-button class="mat-raised-button mat-primary" (click)="searchBy()">
+  Go!</button>
+
+
+
+</p>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>Select</th>
+    <td mat-cell *matCellDef="let element">{{element.position}}
+
+      <span *ngIf="element.bMarker">
+        <span  class="check_circle">	<mat-icon>check_circle</mat-icon></span>
+      </span>
+      <span *ngIf="!element.bMarker">
+        <mat-icon>panorama_fish_eye</mat-icon>
+       </span>
+
+      <!-- <span *ngIf="!clickedRows.has(row)" class="check_circle">face</span> -->
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}
+
+    </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef>Count</th>
+    <td mat-cell *matCellDef="let element">{{element.weight}}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef>Symbol</th>
+    <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
+  </ng-container>
+  <!-- (click)="clickedRows.add(row)" -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+      mat-row
+      (click)="clickedRows22(row)"
+      [class.demo-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns;"
+  ></tr>
+</table>
+
+<div>
+  <h3>
+    Click Log
+  </h3>
+</div>
+
+<div *ngIf="!clickedRows.size">
+  Clicked rows will be logged here
+</div>
+
+<ul>
+  <li *ngFor="let clickedRow of clickedRows">
+    Clicked on {{clickedRow.name}}
+  </li>
+</ul>
+

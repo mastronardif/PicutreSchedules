@@ -6,6 +6,7 @@ import { CourseComponent } from "./course/course.component";
 import { ScheduleComponent } from "./component/schedule/schedule.component";
 import { ListquillsComponent } from "./component/listquills/listquills.component";
 import { QuillComponent } from "./component/listquills/quill/quill.component";
+import { SearchComponent } from "./component/search/search.component";
 
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: "about",
     component: AboutComponent,
+  },
+  {
+    path: "search",
+    component: SearchComponent,
   },
   {
     path: "listquills",

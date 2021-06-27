@@ -11,10 +11,12 @@
 	</ng-template>
 </mat-menu>
 
+<div id="my-node">ZZZZZZZZZZZZZZ<br/> bbbbb</div>
+
 <div class="about">
     <h2>Picture Schedules</h2>
 
-    <img class="course-image mat-elevation-z10"
+    <img id="FUCKmylist" class="course-image mat-elevation-z10" width="30px" height="30px"
          src="http://joeschedule.com/JoeSchedules_Visual_Toolkit/Conversation_Cards_files/conversation%20cards.jpg">
 
 <P>
@@ -32,7 +34,7 @@
 
 </div>
 
-<quill-editor #fuck [(ngModel)]="content" trackChanges="all"  [styles]="{height: '200px'}"
+<!-- <quill-editor #fuck [(ngModel)]="content" trackChanges="all"  [styles]="{height: '200px'}"
   (onFocus)="focus($event)"
 	(onEditorChanged)="changedEditor($event)"
 	(onBlur)="blur($event)"
@@ -49,12 +51,12 @@
   <paste-image-from-clipboard>
 
   </paste-image-from-clipboard>
-</div>
+</div> -->
 <hr/>
 <div class="div2" (contextmenu)="onContextMenu($event, {id: 1, name: 'mypaste'})">aaaaaa</div>
 
 <hr>
-<div class="drop">
+<!-- <div class="drop">
 	<div class="cont">
 		<div class="desc">
 			drop / paste here your images
@@ -64,5 +66,51 @@
 		<img class="img-responsive drag" style="border-radius: 8px;">
   </div>
 		<input type="file" id="files" multiple (change)="detectFiles($event)" accept="image/*">
-</div>
+</div> -->
 <teststuff></teststuff>
+
+<!-- <img src="" id="myimage" alt="my image"/> -->
+
+<div> <img src="{{imagePath}}" /> </div>
+
+<!-- <img [src]="imagePath" width="100px" height="100px"> -->
+
+<div class="container">
+  <div id="pdfTable" #pdfTable>
+    <h2>Angular HTML To PDF Generator Example - ItSolutionStuff.com</h2>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hardik</td>
+          <td>Savani</td>
+          <td>itsolutionstuff.com</td>
+        </tr>
+        <tr>
+          <td>Vimal</td>
+          <td>Kashiyani</td>
+          <td>hdtuto.com</td>
+        </tr>
+        <tr>
+          <td>Harshad</td>
+          <td>Pathak</td>
+          <td>nicesnippets.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button class="btn btn-primary" (click)="downloadAsPDF()">Export To PDF</button>
+
+  <hr/><div class="btn btn-primary" (click)="downloadImage()">DL</div>
+  <div id="download">
+    <img #canvas>
+    <a #downloadLink></a>
+  </div>
+</div>

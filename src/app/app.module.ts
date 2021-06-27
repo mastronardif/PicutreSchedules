@@ -42,6 +42,7 @@ import { QuillComponent } from './component/listquills/quill/quill.component';
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
 import { TeststuffComponent } from './component/teststuff/teststuff.component';
+import { SearchComponent } from './component/search/search.component';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import { TeststuffComponent } from './component/teststuff/teststuff.component';
         ListquillsComponent,
         QuillComponent,
         TeststuffComponent,
+        SearchComponent,
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebase, 'crud'),

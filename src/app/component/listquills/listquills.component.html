@@ -31,8 +31,16 @@
           <!-- <nav>
             <a routerLink="/quills/view/-M_alsbCaayW8IOf05OG">{{ii}}</a>
           </nav> -->
-
-          <p>{{ post.content }}</p>
+          <p>{{makeStrip(post)}}</p>
+          <!-- <p>{{ post.content }}</p> -->
+          <!-- <section class="content" *ngIf="html" [innerHTML]="post.content"></section> -->
+          <div id="div1" >
+            <div id="div2">
+              <section class="content" *ngIf="html" [innerHTML]="post.content"></section>
+            </div>
+          </div>
+          <hr/>
+          <!-- <quill-view [styles]="{height: '200px'}"  [content]="post.content" format="html" theme="snow"></quill-view> -->
         </li>
       </ul>
       <p *ngIf="isFetching">Loading...</p>
