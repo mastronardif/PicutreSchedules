@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs';
+import { QueryTag } from './common/services/models/tag.model';
 import {Store} from './common/store.service';
 
 @Component({
@@ -7,14 +9,12 @@ import {Store} from './common/store.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements  OnInit{
+  queryTag$: Observable<QueryTag>;
 
+  constructor(private store:Store) {  }
 
-    constructor(private store:Store) {
-
-    }
-
-    ngOnInit() {
-        this.store.init();
-    }
-
+  ngOnInit() {
+    this.store.init();
+    this.queryTag$ = this.store.selectQueryWhere();
+  }
 }

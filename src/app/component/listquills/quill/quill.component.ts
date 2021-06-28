@@ -3,9 +3,9 @@ import { ActivatedRoute, Params } from "@angular/router";
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormArray } from "@angular/forms";
-import { DataService } from "../../../common/services/data.service";
+//import { DataService } from "../../../common/services/data.service";
 import { Post } from "../../../common/services/post.model";
-import { Quill, Tag } from "../../../common/services/models/tag.model";
+import { Quill } from "../../../common/services/models/tag.model";
 import { TagService } from "../../../common/services/tag.service";
 @Component({
   selector: "quill",
@@ -30,7 +30,7 @@ export class QuillComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private dataService: DataService,
+    //private dataService: DataService,
     private tagService: TagService
   ) {}
 
@@ -93,7 +93,7 @@ export class QuillComponent implements OnInit {
     this.tagService.createQuill(quill);
   }
 
-  updateQuil(policy: Tag) {
+  updateQuil() {
     let desc = this.profileForm.get("description").value;
     let data = this.profileForm.get("fuck22").value  || null;
     const quill: Quill = {
@@ -131,33 +131,33 @@ export class QuillComponent implements OnInit {
       });
   }
 
-  getQuil(id: string) {
-    console.log("\t getQuil()");
-    this.dataService.fetchPosts;
-    this.dataService.fetchPosts().subscribe(
-      (posts) => {
-        //this.isFetching = false;
-        this.loadedPosts = posts;
-        console.log(this.loadedPosts);
-        console.log(this.loadedPosts[id].title);
-        //console.log(this.loadedPosts[7].content);
-        this.content = this.loadedPosts[id].content;
-        this.title = this.loadedPosts[id].title;
-        this.idd = this.loadedPosts[id].id;
+  // getQuil(id: string) {
+  //   console.log("\t getQuil()");
+  //   this.dataService.fetchPosts;
+  //   this.dataService.fetchPosts().subscribe(
+  //     (posts) => {
+  //       //this.isFetching = false;
+  //       this.loadedPosts = posts;
+  //       console.log(this.loadedPosts);
+  //       console.log(this.loadedPosts[id].title);
+  //       //console.log(this.loadedPosts[7].content);
+  //       this.content = this.loadedPosts[id].content;
+  //       this.title = this.loadedPosts[id].title;
+  //       this.idd = this.loadedPosts[id].id;
 
-        // set form values
-        this.profileForm.patchValue({ description: this.title });
-        this.profileForm.patchValue({ fuck22: this.content });
-      },
-      (error) => {
-        //this.isFetching = false;
-        //this.error = error.message;
-      }
-    );
+  //       // set form values
+  //       this.profileForm.patchValue({ description: this.title });
+  //       this.profileForm.patchValue({ fuck22: this.content });
+  //     },
+  //     (error) => {
+  //       //this.isFetching = false;
+  //       //this.error = error.message;
+  //     }
+  //   );
 
-    console.log(this.content);
-    ////this.content = '';
-  }
+  //   console.log(this.content);
+  //   ////this.content = '';
+  // }
 
   onSubmit() {
     // TODO: Use EventEmitter with form value

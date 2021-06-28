@@ -2,6 +2,7 @@ import { viewClassName } from "@angular/compiler";
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import { MatMenuTrigger } from "@angular/material/menu";
 import { EditorChangeContent, EditorChangeSelection, QuillEditorComponent } from "ngx-quill";
+import {Store} from '../common/store.service';
 //import { QuillEditorBase } from "ngx-quill";
 import {
   concat,
@@ -33,6 +34,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
 import html2canvas from 'html2canvas';
 import domtoimage from 'dom-to-image-more';
+import { QueryTag } from "../common/services/models/tag.model";
+import { ScheduleRootObject } from "../common/services/schedule.model";
 //
 @Component({
   selector: "about",
@@ -69,8 +72,12 @@ export class AboutComponent implements OnInit {
   loadedPosts: Post[] = [];
   imagePath = '';
 
-  constructor(private dataService: DataService) {
+  //subject = new BehaviorSubject(Tag);
+  schedules$: Observable<ScheduleRootObject[]>;
+  queryTag$: Observable<QueryTag>;
 
+
+  constructor(private dataService: DataService, private store:Store) {
   }
 
   onContextMenu(event: MouseEvent, item: Item) {
@@ -106,8 +113,23 @@ export class AboutComponent implements OnInit {
   }
 
   ngOnInit() {
+    //
+    this.queryTag$ = this.store.selectQueryWhere();
+    this.queryTag$.subscribe(value => {
+      console.log("\t QQQQ Subscription got", value);
+      console.log("\t QQQQ Subscription where", value.whereClause);
+    });
+    //
+
+    this.schedules$ = this.store.selectSchedules();
+    this.schedules$.subscribe(value => {
+      console.log("\t ZZZZZZZz Subscription got", value);
+    });
+
     var node = document.getElementById('my-node');
+    console.log('about.component: ngOnInit()')
     console.log(this);
+    // const subject = new Rx.BehaviorSubject();
     var bobo;
     this.imagePath = bobo;
 

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
-import { Quill, Tag } from "./models/tag.model";
+import { Quill } from "./models/tag.model";
 
 @Injectable({
   providedIn: "root",

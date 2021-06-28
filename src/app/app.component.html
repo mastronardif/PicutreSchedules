@@ -54,6 +54,7 @@
       </button>
     </mat-toolbar>
 
+    <div style="color: rgb(172, 13, 13);text-align:center"> {{(queryTag$ | async).whereClause}}    </div>
     <router-outlet></router-outlet>
 
 </mat-sidenav-container>

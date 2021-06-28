@@ -17,6 +17,7 @@ import { createHttpObservable } from "./util";
 import { fromPromise } from "rxjs/internal-compatibility";
 import { DataService } from "./services/data.service";
 import * as moment from "moment";
+import { QueryTag } from "./services/models/tag.model";
 
 @Injectable({
   providedIn: 'root',
@@ -25,8 +26,22 @@ export class Store {
   private subject = new BehaviorSubject<Course[]>([]);
   private scheduleSubject = new BehaviorSubject<ScheduleRootObject[]>([]);
   //constructor(private http33: HttpClient) {}
+  ttt: QueryTag = {
+    whereClause: 'azazaz',
+    tags: []
+  };
+
+  private _todos: BehaviorSubject<QueryTag> = new BehaviorSubject(this.ttt);
+  public readonly todos$: Observable<QueryTag> = this._todos.asObservable();
+  //
   constructor(private http: HttpClient, private dataService: DataService) {
   }
+
+  //
+  selectQueryWhere() {
+    return this.todos$; //this.filterByCategory("BEGINNER");
+  }
+  //
 
   courses$: Observable<Course[]> = this.subject.asObservable();
   //private http: HttpClient;
@@ -68,6 +83,13 @@ export class Store {
     //   console.log("XXXXXXXXXXXXXXXxx");
     //   console.log(res);
     // });
+  }
+
+  setQuery(src: QueryTag) {
+    // let qqq = new QueryTag();
+    // qqq.where= 'qqqqqqqqq';
+    this._todos.next(src);
+
   }
 
   selectSchedules() {

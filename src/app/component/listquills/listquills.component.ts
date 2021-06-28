@@ -97,7 +97,7 @@ export class ListquillsComponent implements OnInit {
   }
 
   makeStrip(src: Post) {
-    console.log('makeStrip');
+    //console.log('makeStrip');
     const template = `
   //   <div id="div1">
   //   <div id="div2">

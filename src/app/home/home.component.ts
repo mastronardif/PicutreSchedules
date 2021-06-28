@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Course} from "../model/course";
-import { DataService } from '../common/services/data.service';
+//import { DataService } from '../common/services/data.service';
 import {interval, noop, Observable, of, throwError, timer} from 'rxjs';
 import {catchError, delay, delayWhen, finalize, map, retryWhen, shareReplay, tap} from 'rxjs/operators';
 import {createHttpObservable} from '../common/util';
@@ -21,7 +21,9 @@ export class HomeComponent implements OnInit {
 
     private loadedSchedules: ScheduleRootObject[] = [];
     //loadedPosts: Post[] = [];
-    constructor(private store:Store, private dataService: DataService) {
+   // constructor(private store:Store, private dataService: DataService) {
+
+    constructor(private store:Store) {
     }
 
     ngOnInit() {

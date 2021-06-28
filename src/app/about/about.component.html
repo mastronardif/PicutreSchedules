@@ -12,6 +12,12 @@
 </mat-menu>
 
 <div id="my-node">ZZZZZZZZZZZZZZ<br/> bbbbb</div>
+the b subject begin: <br/>
+---
+ <span> {{queryTag$ | async|json}} </span>
+ <br/>
+ <span style="color: red;">  {{(queryTag$ | async).whereClause}} </span>
+ <br/>the b subject END :
 
 <div class="about">
     <h2>Picture Schedules</h2>

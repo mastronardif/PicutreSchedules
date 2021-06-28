@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { QueryTag } from '../../common/services/models/tag.model';
+import { Store } from '../../common/store.service';
 
 
 export interface PeriodicElement {
@@ -34,18 +36,36 @@ export class SearchComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
-  public email: string;
+  public whereClause: string;
 
-  constructor() { }
+  constructor(private store:Store) { }
 
   ngOnInit(): void {
   }
 
   searchBy() {
     console.log('searchBy');
-    console.log(this.email);
+    console.log(this.whereClause);
     console.log(this.clickedRows);
+    let array = [...this.clickedRows];
 
+    console.log(array);
+    let list = array.map(it => {
+      //it.symbol
+      return (it.symbol);
+    })
+
+    console.log( list.toString());
+    const whereClause = this.whereClause || '';
+
+    let queryNormalized = '"' + whereClause + '"' + ' Tags('+ list.toString() + ')';
+    let query: QueryTag = {
+      whereClause: queryNormalized,
+      //whereClause: queryNormalized,
+      tags: array
+    };
+    //
+    this.store.setQuery(query);
   }
 
   clickedRows22(row: PeriodicElement) {
