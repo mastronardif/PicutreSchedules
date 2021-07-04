@@ -27,7 +27,7 @@ export class Store {
   private scheduleSubject = new BehaviorSubject<ScheduleRootObject[]>([]);
   //constructor(private http33: HttpClient) {}
   ttt: QueryTag = {
-    whereClause: 'azazaz',
+    whereClause: '',
     tags: []
   };
 
@@ -89,6 +89,8 @@ export class Store {
     // let qqq = new QueryTag();
     // qqq.where= 'qqqqqqqqq';
     this._todos.next(src);
+
+    //return this.filterByCategory("BEGINNER");
 
   }
 

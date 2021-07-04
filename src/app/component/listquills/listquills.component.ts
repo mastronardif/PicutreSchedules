@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { ActivatedRoute, Params } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { DataService } from "../../common/services/data.service";
-import { Quill } from "../../common/services/models/tag.model";
+import { QueryTag, Quill } from "../../common/services/models/tag.model";
 import { Post } from "../../common/services/post.model";
 import { TagService } from "../../common/services/tag.service";
+import { Store } from "../../common/store.service";
 
 @Component({
   selector: "listsquills",
@@ -18,16 +19,28 @@ export class ListquillsComponent implements OnInit {
   error = null;
   id: string;
   html: SafeHtml;
+  whereCaluse: QueryTag;
   private errorSub: Subscription;
+  queryTag$: Observable<QueryTag>;
 
   constructor(
+    private store:Store,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private postsService: DataService,
     private tagService: TagService
-  ) {}
+  ) {this.queryTag$ = this.store.selectQueryWhere();
+  }
 
   ngOnInit(): void {
+    console.log("\t  listquills: ngOnInit()");
+
+    this.queryTag$.subscribe(value => {
+      this.whereCaluse = value;
+      console.log("\t QQQQ Subscription got whereCaluse= ", this.whereCaluse);
+      console.log("\t QQQQ Subscription where", value.whereClause);
+    });
+
     const template = `
     <div id="div1">
   <div id="div2">
@@ -50,8 +63,9 @@ export class ListquillsComponent implements OnInit {
     this.errorSub = this.tagService.getQuills().subscribe((errorMessage) => {
       this.error = errorMessage;
     });
-
-    this.tagService.getQuills().subscribe((data) => {
+    //getQuillsWhere() getQuills {
+      //
+    this.tagService.getQuillsWhere(this.whereCaluse).subscribe((data) => {
       console.log("ddd");
       console.log(data);
       //  this.loadedPosts = posts;

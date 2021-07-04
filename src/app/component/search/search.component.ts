@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { QueryTag } from '../../common/services/models/tag.model';
 import { Store } from '../../common/store.service';
 
@@ -38,7 +39,7 @@ export class SearchComponent implements OnInit {
   clickedRows = new Set<PeriodicElement>();
   public whereClause: string;
 
-  constructor(private store:Store) { }
+  constructor(private store:Store, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -60,12 +61,13 @@ export class SearchComponent implements OnInit {
 
     let queryNormalized = '"' + whereClause + '"' + ' Tags('+ list.toString() + ')';
     let query: QueryTag = {
-      whereClause: queryNormalized,
-      //whereClause: queryNormalized,
+      whereClause: whereClause, //queryNormalized,
       tags: array
     };
     //
     this.store.setQuery(query);
+    this.router.navigate(['/listquills']);
+    //this.router.navigate(['/about']);
   }
 
   clickedRows22(row: PeriodicElement) {

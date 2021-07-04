@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
-import { Quill } from "./models/tag.model";
+import { QueryTag, Quill } from "./models/tag.model";
 
 @Injectable({
   providedIn: "root",
@@ -65,6 +65,16 @@ export class TagService {
   }
 
   getQuills() {
+    //return this.getQuillsWhere();
     return this.firestore.collection("quills").snapshotChanges();
+  }
+
+  getQuillsWhere(where: QueryTag) {
+    const qry = where.whereClause;
+    console.log(`qry= ${qry}`);
+    //afs.collection('items', ref => ref.where('size', '==', 'large'))
+    //collectionRef.where('name', '>=', 'bar').where('name', '<=', 'foo')
+    return this.firestore.collection('quills', ref => ref.where('title', '>=', qry).where('title', '<=', 'Z')).snapshotChanges();
+    //return this.firestore.collection('quills', ref => ref.where('title', '>=', qry)).snapshotChanges();
   }
 }

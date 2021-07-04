@@ -1,4 +1,4 @@
-import { viewClassName } from "@angular/compiler";
+//import { viewClassName } from "@angular/compiler";
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import { MatMenuTrigger } from "@angular/material/menu";
 import { EditorChangeContent, EditorChangeSelection, QuillEditorComponent } from "ngx-quill";
@@ -18,22 +18,23 @@ import {
   BehaviorSubject,
   AsyncSubject,
   ReplaySubject,
+  Observer,
 } from "rxjs";
-import { delayWhen, filter, map, take, timeout } from "rxjs/operators";
+//import { delayWhen, filter, map, take, timeout } from "rxjs/operators";
 import { DataService } from "../common/services/data.service";
 import { Post } from "../common/services/post.model";
-import { createHttpObservable } from "../common/util";
+//import { createHttpObservable } from "../common/util";
 import { PasteFromClipboardComponent22 } from "../component/paste-image-from-clipboard22";
 //
 import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
-import jsPDF from 'jspdf';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-import htmlToPdfmake from 'html-to-pdfmake';
+//import jsPDF from 'jspdf';
+// import pdfMake from 'pdfmake/build/pdfmake';
+// import pdfFonts from 'pdfmake/build/vfs_fonts';
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
+//import htmlToPdfmake from 'html-to-pdfmake';
 import html2canvas from 'html2canvas';
-import domtoimage from 'dom-to-image-more';
+//import domtoimage from 'dom-to-image-more';
 import { QueryTag } from "../common/services/models/tag.model";
 import { ScheduleRootObject } from "../common/services/schedule.model";
 //
@@ -53,7 +54,7 @@ export class AboutComponent implements OnInit {
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
 
-  @ViewChild('pdfTable') pdfTable: ElementRef;
+  //@ViewChild('pdfTable') pdfTable: ElementRef;
 
   @ViewChild('alterEgo') alterEgo: ElementRef;
   alterEgo2='';
@@ -175,6 +176,23 @@ export class AboutComponent implements OnInit {
     // console.log(this.fu.content);
   }
 
+testObs() {
+// Create a new Observable that will deliver the above sequence
+const sequence = new Observable(sequenceSubscriber);
+
+// execute the Observable and print the result of each notification
+sequence.subscribe({
+  next(num) { console.log(num); },
+  complete() { console.log('Finished sequence'); }
+});
+
+// Logs:
+// 1
+// 2
+// 3
+// Finished sequence
+  }
+
   getQuil() {
     console.log('\t getQuil()');
     this.dataService.fetchPosts
@@ -223,20 +241,19 @@ export class AboutComponent implements OnInit {
     this.blured = true
   }
   ////////////////////
-
-  public downloadAsPDF() {
-    const doc = new jsPDF();
-
-    const pdfTable = this.pdfTable.nativeElement;
-
-    var html = htmlToPdfmake(pdfTable.innerHTML);
-
-    const documentDefinition = { content: html };
-    pdfMake.createPdf(documentDefinition).open();
-
-  }
 }
+// This function runs when subscribe() is called
+function sequenceSubscriber(observer: Observer<number>) {
+  // synchronously deliver 1, 2, and 3, then complete
+  observer.next(1);
+  observer.next(2);
+  observer.next(3);
+  observer.complete();
 
+  // unsubscribe function doesn't need to do anything in this
+  // because values are delivered synchronously
+  return {unsubscribe() {}};
+}
 export interface Item {
   id: number;
   name: string;
