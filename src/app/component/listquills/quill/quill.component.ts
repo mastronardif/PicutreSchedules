@@ -24,7 +24,7 @@ export class QuillComponent implements OnInit {
 
   profileForm = this.fb.group({
     description: [""],
-    fuck22: [""],
+    picSchedule: [""],
   });
 
   constructor(
@@ -87,7 +87,7 @@ export class QuillComponent implements OnInit {
   // }
   createQuill() {
     let desc = this.profileForm.get("description").value;
-    let data = this.profileForm.get("fuck22").value;
+    let data = this.profileForm.get("3").value;
     const quill: Quill = { title: desc, content: data, id: "tbd" };
 
     this.tagService.createQuill(quill);
@@ -95,7 +95,7 @@ export class QuillComponent implements OnInit {
 
   updateQuil() {
     let desc = this.profileForm.get("description").value;
-    let data = this.profileForm.get("fuck22").value  || null;
+    let data = this.profileForm.get("picSchedule").value  || null;
     const quill: Quill = {
       title: desc,
       content: data,
@@ -116,11 +116,11 @@ export class QuillComponent implements OnInit {
           console.log("Document data:", doc.data());
           this.content = doc.data().content;
           this.title = doc.data().title;
-          //this.idd = doc.data().id;
+          //this.tags = doc.data().tags;
 
           // set form values
           this.profileForm.patchValue({ description: this.title });
-          this.profileForm.patchValue({ fuck22: this.content });
+          this.profileForm.patchValue({ picSchedule: this.content });
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -169,7 +169,7 @@ export class QuillComponent implements OnInit {
     let retVal: string = '';
 
     const part = route.firstChild?.snapshot.url[0].path;
-    if (this.route.snapshot.routeConfig.path === 'newquil')
+    if (this.route.snapshot.routeConfig.path === 'newquill')
       return "NEW"
 
     switch (part) {

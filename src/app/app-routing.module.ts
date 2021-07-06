@@ -35,7 +35,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: "newquil",
+    path: "newquill",
     component: QuillComponent,
   },
   {

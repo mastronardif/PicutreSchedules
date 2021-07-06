@@ -60,9 +60,9 @@ export class ListquillsComponent implements OnInit {
     });
 
     //
-    this.errorSub = this.tagService.getQuills().subscribe((errorMessage) => {
-      this.error = errorMessage;
-    });
+    // this.errorSu22 = this.tagService.error.subscribe((errorMessage) => {
+    //   this.error = errorMessage;
+    // });
     //getQuillsWhere() getQuills {
       //
     this.tagService.getQuillsWhere(this.whereCaluse).subscribe((data) => {

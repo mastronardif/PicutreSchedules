@@ -14,7 +14,7 @@
     <button *ngIf="editMode=='NEW'" (click)="createQuill()">Create</button>
     <button *ngIf="editMode=='EDIT'"(click)="updateQuil({})">Update</button>
 
-    <quill-editor formControlName="fuck22" trackChanges="all"  [styles]="{height: '200px'}"></quill-editor>
+    <quill-editor formControlName="picSchedule" trackChanges="all"  [styles]="{height: '200px'}"></quill-editor>
   </div>
   <!-- <label>
     <quill-editor #fuck [(ngModel)]="content" trackChanges="all"  [styles]="{height: '200px'}"></quill-editor>
@@ -26,11 +26,12 @@
   <button type="submit" [disabled]="!profileForm.valid">Submit</button> -->
 </form>
 
-<p style="background-color: lightgreen;">quill works!<br/>
+<!-- <p style="background-color: lightgreen;">quill works!<br/>
   editMode= {{editMode}}<br/>
   scheduleId= {{scheduleId}}<br/>
   title= {{title}}<br/>
   id = {{idd}}<br/>
-  </p>
+  </p> -->
 
   <quill-view-html *ngIf="editMode=='VIEW'" [content]="content" theme="snow"></quill-view-html>
+  <br/> TBD SHOW TAGS<br/>

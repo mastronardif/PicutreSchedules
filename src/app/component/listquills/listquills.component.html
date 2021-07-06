@@ -4,7 +4,7 @@
       <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
       <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching">
         <li class="list-group-item" *ngFor="let post of loadedPosts; index as ii;">
-          <h3> {{ii}}.
+          <h3> {{ii+1}}/{{loadedPosts.length}}.
             <span style="background-color: lightcoral;">{{ post.title }}</span>
             --
           <button mat-button class="mat-raised-button mat-primary" [routerLink]="['/quills/view',  post.idDoc]">

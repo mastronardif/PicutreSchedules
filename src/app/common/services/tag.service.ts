@@ -64,17 +64,35 @@ export class TagService {
     // return this.firestore.doc('quills/' + id).get();
   }
 
-  getQuills() {
+  getQuillTags(where: QueryTag) {
+    const limit = 20;
+    const qry = where.whereClause;
     //return this.getQuillsWhere();
+    //return this.firestore.collection('quills', ref => ref.where('title', '>=', qry).limit(limit).orderBy('title', 'asc')).snapshotChanges();
+    return this.firestore.collection("quills").snapshotChanges();
+  }
+
+  private getQuills(where: QueryTag) {
+    const limit = 20;
+    const qry = where.whereClause;
+    //return this.getQuillsWhere();
+    //return this.firestore.collection('quills', ref => ref.where('title', '>=', qry).limit(limit).orderBy('title', 'asc')).snapshotChanges();
     return this.firestore.collection("quills").snapshotChanges();
   }
 
   getQuillsWhere(where: QueryTag) {
+    if (where.tags.length == 0) { return this.getQuills(where); }
+    const limit = 20;
     const qry = where.whereClause;
+    //const quillsColl = this.firestore.collection('quills');
     console.log(`qry= ${qry}`);
-    //afs.collection('items', ref => ref.where('size', '==', 'large'))
     //collectionRef.where('name', '>=', 'bar').where('name', '<=', 'foo')
-    return this.firestore.collection('quills', ref => ref.where('title', '>=', qry).where('title', '<=', 'Z')).snapshotChanges();
+    return this.firestore.collection('quills', ref => ref.where('tags', "array-contains", "H")
+                         .limit(limit)).snapshotChanges();
+
+
+    //return this.firestore.collection('quills', ref => ref.where('title', '>=', qry).where('title', '<=', 'Z')).snapshotChanges();
     //return this.firestore.collection('quills', ref => ref.where('title', '>=', qry)).snapshotChanges();
+    //https://github.com/firebase/snippets-node/blob/f15eb63d200710e6e53e586cbb359e49e26af9e9/firestore/main/index.js#L614-L615
   }
 }

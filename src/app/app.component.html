@@ -16,7 +16,7 @@
               <mat-icon>question_answer</mat-icon>
               <span>New Guy</span>
             </a> -->
-            <a mat-list-item routerLink="newquil">
+            <a mat-list-item routerLink="newquill">
               <mat-icon>question_answer</mat-icon>
               <span>New Guy</span>
             </a>
@@ -52,9 +52,11 @@
         <button mat-icon-button routerLink="search">
             <mat-icon>search</mat-icon>
       </button>
+
+      <!-- <p *ngIf="isFetching">Loading...</p> -->
     </mat-toolbar>
 
-    <div style="color: rgb(172, 13, 13);text-align:center"> {{(queryTag$ | async).whereClause}}    </div>
+    <div style="color: rgb(172, 13, 13);text-align:center"> {{(queryTag$ | async).whereClause}} {{(queryTag$ | async).tags|json}}   </div>
     <router-outlet></router-outlet>
 
 </mat-sidenav-container>
