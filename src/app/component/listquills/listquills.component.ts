@@ -15,12 +15,12 @@ import { Store } from "../../common/store.service";
 })
 export class ListquillsComponent implements OnInit {
   loadedPosts: Post[] = [];
-  isFetching = false;
-  error = null;
+  //isFetching = false;
+  //error = null;
   id: string;
   html: SafeHtml;
   whereCaluse: QueryTag;
-  private errorSub: Subscription;
+  //private errorSub: Subscription;
   queryTag$: Observable<QueryTag>;
 
   constructor(
@@ -84,21 +84,21 @@ export class ListquillsComponent implements OnInit {
 
     //
 
-    this.errorSub = this.postsService.error.subscribe((errorMessage) => {
-      this.error = errorMessage;
-    });
+    // this.errorSub = this.postsService.error.subscribe((errorMessage) => {
+    //   this.error = errorMessage;
+    // });
 
-    this.isFetching = true;
-    this.postsService.fetchPosts().subscribe(
-      (posts) => {
-        this.isFetching = false;
-        ////this.loadedPosts = posts;
-      },
-      (error) => {
-        this.isFetching = false;
-        this.error = error.message;
-      }
-    );
+    // this.isFetching = true;
+    // this.postsService.fetchPosts().subscribe(
+    //   (posts) => {
+    //     // this.isFetching = false;
+    //     ////this.loadedPosts = posts;
+    //   },
+    //   (error) => {
+    //     // this.isFetching = false;
+    //     this.error = error.message;
+    //   }
+    // );
   }
 
   deleteQuill(id: string) {

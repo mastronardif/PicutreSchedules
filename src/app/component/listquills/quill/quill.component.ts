@@ -87,7 +87,7 @@ export class QuillComponent implements OnInit {
   // }
   createQuill() {
     let desc = this.profileForm.get("description").value;
-    let data = this.profileForm.get("3").value;
+    let data = this.profileForm.get("picSchedule").value;
     const quill: Quill = { title: desc, content: data, id: "tbd" };
 
     this.tagService.createQuill(quill);

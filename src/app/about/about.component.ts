@@ -37,6 +37,7 @@ import html2canvas from 'html2canvas';
 //import domtoimage from 'dom-to-image-more';
 import { QueryTag } from "../common/services/models/tag.model";
 import { ScheduleRootObject } from "../common/services/schedule.model";
+import { switchMap } from "rxjs/operators";
 //
 @Component({
   selector: "about",
@@ -186,12 +187,12 @@ sequence.subscribe({
   complete() { console.log('Finished sequence'); }
 });
 
-// Logs:
-// 1
-// 2
-// 3
-// Finished sequence
-  }
+  ////////////
+  console.log('switched');
+  const switched = of(1, 2, 3).pipe(switchMap((x: number) => of(x, x * 2, x * 3)));
+  switched.subscribe(x => console.log(x));
+
+}
 
   getQuil() {
     console.log('\t getQuil()');
