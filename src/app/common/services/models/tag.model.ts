@@ -9,18 +9,18 @@
 //   extraInfo: string;
 // }
 
-interface PeriodicElement {
+export interface TagElement {
   name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  // position: number;
+  // weight: number;
+  // symbol: string;
 
-  bMarker: boolean;
+  //bMarker: boolean;
 }
 export class QueryTag {
   //where: string;
   whereClause: string;
-  tags: PeriodicElement[]
+  tags: TagElement[]
 }
 
 export class Quill {

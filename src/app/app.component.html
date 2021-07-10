@@ -56,7 +56,9 @@
       <!-- <p *ngIf="isFetching">Loading...</p> -->
     </mat-toolbar>
 
-    <div style="color: rgb(172, 13, 13);text-align:center"> {{(queryTag$ | async).whereClause}} {{(queryTag$ | async).tags|json}}   </div>
+    <div style="color: rgb(172, 13, 13);text-align:center"> {{(queryTag$ | async).whereClause}}
+<br/>
+      {{(queryTag$ | async).tags|json}}   </div>
     <router-outlet></router-outlet>
 
 </mat-sidenav-container>

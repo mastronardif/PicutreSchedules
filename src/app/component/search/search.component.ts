@@ -1,29 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { QueryTag } from '../../common/services/models/tag.model';
+import { QueryTag, TagElement } from '../../common/services/models/tag.model';
 import { Store } from '../../common/store.service';
-
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+interface TagRow {
+  tag: TagElement;
 
   bMarker: boolean;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', bMarker: false},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', bMarker: false},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', bMarker: false},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be', bMarker: false},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B', bMarker: false},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C', bMarker: false},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N', bMarker: false},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O', bMarker: false},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F', bMarker: false},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne', bMarker: false},
+const TAG_DATA: TagRow[] = [
+  { tag: {name: 'Hydrogen'}, bMarker: false},
+  { tag: {name: 'Helium'}, bMarker: false},
+  { tag: {name: 'Hygiene'}, bMarker: false},
+  { tag: {name: 'Safety'}, bMarker: false},
+  { tag: {name: 'Bathroom'}, bMarker: false},
+  { tag: {name: 'House Chores'}, bMarker: false},
+  { tag: {name: 'Social'}, bMarker: false},
+  { tag: {name: 'Other'}, bMarker: false},
+  { tag: {name: 'Objects'}, bMarker: false},
+  { tag: {name: 'Mine'}, bMarker: false},
+  { tag: {name: 'Theres'}, bMarker: false},
+  { tag: {name: 'Pics Of'}, bMarker: false},
+  { tag: {name: 'Academic'}, bMarker: false},
 ];
 
 @Component({
@@ -34,9 +32,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class SearchComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-  clickedRows = new Set<PeriodicElement>();
+  displayedColumns: string[] = ['position', 'name']; //['position', 'name', 'weight', 'symbol'];
+  dataSource = TAG_DATA;
+  clickedRows = new Set<TagRow>();
   public whereClause: string;
 
   constructor(private store:Store, private router: Router) { }
@@ -51,9 +49,9 @@ export class SearchComponent implements OnInit {
     let array = [...this.clickedRows];
 
     console.log(array);
-    let list = array.map(it => {
+    let list: TagElement[] = array.map(it => {
       //it.symbol
-      return (it.symbol);
+      return ({name: it.tag.name});
     })
 
     console.log( list.toString());
@@ -62,15 +60,17 @@ export class SearchComponent implements OnInit {
     let queryNormalized = '"' + whereClause + '"' + ' Tags('+ list.toString() + ')';
     let query: QueryTag = {
       whereClause: whereClause, //queryNormalized,
-      tags: array
+      tags: array.map(it => {
+        //it.symbol
+        return ({name: it.tag.name});
+      })
     };
-    //
+
     this.store.setQuery(query);
     this.router.navigate(['/listquills']);
-    //this.router.navigate(['/about']);
   }
 
-  clickedRows22(row: PeriodicElement) {
+  clickedRows22(row: TagRow) {
 
     console.log('clickedRows22');
     console.log(row);
@@ -78,13 +78,11 @@ export class SearchComponent implements OnInit {
 
 
     if (this.clickedRows.has(row)) {
-      //row.position -= 111;
       row.bMarker = false;
       this.clickedRows.delete(row);
     }
     else {
       row.bMarker = true;
-      //row.position += 111;
       this.clickedRows.add(row);
     }
 

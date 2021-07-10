@@ -14,7 +14,7 @@
     <button *ngIf="editMode=='NEW'" (click)="createQuill()">Create</button>
     <button *ngIf="editMode=='EDIT'"(click)="updateQuil({})">Update</button>
 
-    <quill-editor formControlName="picSchedule" trackChanges="all"  [styles]="{height: '200px'}"></quill-editor>
+    <quill-editor formControlName="picSchedule" trackChanges="all"></quill-editor>
   </div>
   <!-- <label>
     <quill-editor #fuck [(ngModel)]="content" trackChanges="all"  [styles]="{height: '200px'}"></quill-editor>
